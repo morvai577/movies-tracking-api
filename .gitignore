@@ -476,3 +476,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 Movies.Api/appsettings.json
+.env
+
+#Docker
+docker-data/*
