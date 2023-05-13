@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Movies.Application.Database;
 using Movies.Application.Repositories;
@@ -10,6 +11,8 @@ public static class ApplicationServiceCollectionExtensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddSingleton<IMovieRepository, MovieRepository>();
+        services.AddSingleton<IMovieService, MovieService>();
+        services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);
         return services;
     }
 
@@ -18,7 +21,6 @@ public static class ApplicationServiceCollectionExtensions
         // Note this is actually a singleton masking a transient
         services.AddSingleton<IDbConnectionFactory>(new NpgsqlDbConnectionFactory(connectionString));
         services.AddSingleton<DbInitialiser>();
-        services.AddSingleton<IMovieService, MovieService>();
         return services;
     }
     
