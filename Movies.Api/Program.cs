@@ -1,3 +1,4 @@
+global using Movies.Api;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -31,8 +32,8 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admin", policy =>
-        policy.RequireClaim("admin", "true"));
+    options.AddPolicy(AuthConstants.AdminUserPolicyName, policy =>
+        policy.RequireClaim(AuthConstants.AdminUserClaimName, "true"));
 });
 
 
